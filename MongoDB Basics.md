@@ -110,6 +110,13 @@ like this:
 
     db.collection.insert([{<doc:1>}.{<doc:2>}], {"ordered": false})
 
+> if we try to insert many documents in a collection and there is an _id field that repeats mongo insert all the documents indicated before that error. If it's located in the second document indicated there only will be one document inserted.
+
+    db.collection.insert([{ "_id": 1, "pet": "cat" }, { "_id": 1, "pet": "dog" }, { "_id": 3, "pet": "snake" }], {"ordered": true})
+
+Here only be the first document inserted and if ordered is setted to false only one of the documents that has "_id": 1 and "_id": 3 would be inserted.
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE0NDkxODIwXX0=
+eyJoaXN0b3J5IjpbLTEyNTQxNTYyMDJdfQ==
 -->
