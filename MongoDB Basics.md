@@ -1,7 +1,7 @@
 # Welcome to MongoDB Basics by Roberto Jacobo
 
 ## Importing and Exporting Data
-As we know MongoDB handle the data in JSON and BSON (Binary JSON) but, first we need to decide how we are going to handle de data.
+As we know MongoDB handle the data in JSON and BSON (Binary JSON) but, first we need to decide how we are going to handle the data.
 
 JSON
 
@@ -116,7 +116,24 @@ like this:
 
 Here only be the first document inserted and if ordered is setted to false only one of the documents that has "_id": 1 and "_id": 3 would be inserted.
 
+## Updating Documents
+there is two ways to update documents 
 
+    updateOne()
+
+and 
+
+    updateMany()
+and they are used the same way as .find(), with the first {} as a filter. Like this:
+
+    db.zips.updateMany({"city": "HUDSON"},{"$inc": {"pop": 10, "<field>": <increment value>, ...}})
+increments in the field "pop" all the documents that have the field and value "city": "HUDSON"
+
+    db.zips.updateOne({"zip": "12534"},{"$set": {"pop": 17834})
+this $set command replace the value of the indicated field "pop": with the new 17834 value
+
+    db.zips.updateOne({"<field>": "<value>"},{"$push": {"<field2>": "<value2>"})
+$push adds and element to an array field
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNTQxNTYyMDJdfQ==
+eyJoaXN0b3J5IjpbOTkyODEwMjE5XX0=
 -->
