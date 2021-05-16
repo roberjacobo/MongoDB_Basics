@@ -116,7 +116,7 @@ like this:
 
 Here only be the first document inserted and if ordered is setted to false only one of the documents that has "_id": 1 and "_id": 3 would be inserted.
 
-## Updating Documents
+## Adding and Updating Documents
 there is two ways to update documents 
 
     updateOne()
@@ -131,9 +131,28 @@ increments in the field "pop" all the documents that have the field and value "c
 
     db.zips.updateOne({"zip": "12534"},{"$set": {"pop": 17834})
 this $set command replace the value of the indicated field "pop": with the new 17834 value
+if the field doesn't exist then will be created by $set
 
     db.zips.updateOne({"<field>": "<value>"},{"$push": {"<field2>": "<value2>"})
 $push adds and element to an array field
+
+## Deleting documents
+there is two ways to delete documents 
+
+    deleteOne()
+
+and 
+
+    deleteMany()
+
+> they both work as the same way that find() and update()
+
+and we can delete an entire collection with **.drop()**
+
+    db.collection.drop()
+
+> this returns a true, or false if the collection doesn't exist.
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTkyODEwMjE5XX0=
+eyJoaXN0b3J5IjpbLTIzMTIzMzAwNF19
 -->
