@@ -153,6 +153,8 @@ and we can delete an entire collection with **.drop()**
 
 > this returns a true, or false if the collection doesn't exist.
 
+## Adavance CRUD Operations || Query Operators: Comparison
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzMTIzMzAwNF19
+eyJoaXN0b3J5IjpbMTM1NTk3MzU2N119
 -->
