@@ -219,13 +219,19 @@ both:
 
     db.routes.find({ "$and": [ { "$or" :[ { "dst_airport": "KZN" }, { "src_airport": "KZN" } ] }, { "$or" :[ { "airplane": "CR2" }, { "airplane": "A81" } ] } ]}).pretty()
 
-From the sample_training.inspections collection where the inspection date is either "Feb 20 2015", or "Feb 21 2015" and the company is **not** part of the "Cigarette Retail Dealer - 127" sector
+From the sample_training.inspections collection where the inspection date is either "Feb 20 2015", or "Feb 21 2015" **and** the company is **not** part of the "Cigarette Retail Dealer - 127" sector
 
     db.inspections.find(
       { "$or": [ { "date": "Feb 20 2015" },
                  { "date": "Feb 21 2015" } ],
         "sector": { "$ne": "Cigarette Retail Dealer - 127" }}).pretty()
 
+How many zips in the  sample_training.zips  dataset are neither over-populated nor under-populated?
+
+In this case, we consider population of more than  1,000,000  to be over- populated and less than  5,000  to be under-populated.
+
+    db.zips.find({ "pop": {"$gte": 5000, "$lte": 1000000 } }).count()
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjcxOTU3MTNdfQ==
+eyJoaXN0b3J5IjpbMTI0NDI3NzU5N119
 -->
