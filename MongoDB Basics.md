@@ -154,7 +154,40 @@ and we can delete an entire collection with **.drop()**
 > this returns a true, or false if the collection doesn't exist.
 
 ## Adavance CRUD Operations || Query Operators: Comparison
+**Update operators** 
+Example: *$inc, $set, $unset*
 
+> $ has multiple uses
+Precedes MQL operators
+Precedes Aggregation pipeline stages
+Allow access to Field Values
+
+**Compatison operators**
+|Operator| function |
+|--|--|
+| $eq | EQual to (===) |
+| $ne | Not Equal to (!==) |
+| $gt | Greater Than (>) |
+| $lt | Less Than (<) |
+| $gte | Greater Than or Equal to (>=) |
+| $lte | Less Than or Equal to (<=) |
+
+Example:
+
+    db.collection.find({"tripduration": {"$lte": 70}})
+to use multiple
+
+   
+
+    db.collection.find({ "tripduration": { "$lte" : 70 }, "usertype": { "$ne": "Subscriber" } })
+
+**Logic Operators**
+|Operator| function |
+|--|--|
+| $and |  |
+| $or |  |
+| $nor |  |
+| $not |  |
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1NTk3MzU2N119
+eyJoaXN0b3J5IjpbLTYzMTk5ODEzXX0=
 -->
