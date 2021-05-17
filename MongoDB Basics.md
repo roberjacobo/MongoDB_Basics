@@ -184,10 +184,48 @@ to use multiple
 **Logic Operators**
 |Operator| function |
 |--|--|
-| $and |  |
-| $or |  |
-| $nor |  |
-| $not |  |
+| $and | Match all the specified query clauses |
+| $or | At least one of the query clauses is matched |
+| $nor | Fail to match both given matches |
+| $not | Negates the query requirement |
+
+$and is used as the default operator when an operator is not specified.
+
+    {sector: "Mobile food vendor - 881",  result: "warning" }
+
+is the same as:
+
+    { "$and": [{ sector:  "Mobile food vendor - 881"}, { result: "warning" }]}
+
+**Implicit $and**
+
+**$and** is used as the **default** operator when an operator is not specified.
+
+Find which student ids are > 25 and < 100 in the sample_training.grades collection
+
+    {"$and": [{"student_id": {"$gt": 25}}, {"student_id": {"$lt": 100}}]}
+better:
+
+    {"student_id": {"$gt": 25, "$lt": 100}}
+**Explicit $and**
+The best practices is when you need to include **the same operator more than once** in a query
+
+    {"$or" :[{dst_airport : "KZN"},{src_airport : "KZN"}]}
+
+and
+
+    {"$or" :[{airplane : "CR2"}, {airplane : "A81"}]}
+both:
+
+    db.routes.find({ "$and": [ { "$or" :[ { "dst_airport": "KZN" }, { "src_airport": "KZN" } ] }, { "$or" :[ { "airplane": "CR2" }, { "airplane": "A81" } ] } ]}).pretty()
+
+From the sample_training.inspections collection where the inspection date is either "Feb 20 2015", or "Feb 21 2015" and the company is **not** part of the "Cigarette Retail Dealer - 127" sector
+
+    db.inspections.find(
+      { "$or": [ { "date": "Feb 20 2015" },
+                 { "date": "Feb 21 2015" } ],
+        "sector": { "$ne": "Cigarette Retail Dealer - 127" }}).pretty()
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYzMTk5ODEzXX0=
+eyJoaXN0b3J5IjpbLTE3NjcxOTU3MTNdfQ==
 -->
