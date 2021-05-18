@@ -232,6 +232,47 @@ In this case, we consider population of more than  1,000,000  to be over- popula
 
     db.zips.find({ "pop": {"$gte": 5000, "$lte": 1000000 } }).count()
 
+How many companies in the sample_training.companies dataset were either founded in 2004 and either have the social category_code or web category_code, or were founded in the month of October and also either have the social category_code or web category_code?
+
+    db.companies.find({ "$or" : [ {"founded_year" : 2004 , "$or" : [ {"category_code" : "social"} , {category_code : "web"} ] } , {"founded_month" : 10 , "$or" : [ {"category_code" : "social"} , {category_code : "web"} ] } ] }).count()
+
+**Expresive Query Operator**
+**$expr** allows the use of aggregation expretions within the query language
+
+    { $expr: { <Expression> } }
+**$** denotes the use of an operator
+with $expr we can compare two values in the same document:
+
+    {  "$expr":  {  "$eq":  [  "$end station id",  "$start station id"]  }
+    
+**$** signifies that you are looking at the value of that field rather than the field name.
+
+The following statements will find all the companies that have more employees than the year in which they were founded:
+
+    db.companies.find(
+        { "$expr": { "$gt": [ "$number_of_employees", "$founded_year" ]} }
+      ).count()
+
+and
+
+    db.companies.find(
+        { "$expr": { "$lt": [ "$founded_year", "$number_of_employees" ] } }
+      ).count()
+
+in the sample_training.companies collection have the same *permalink* as their *twitter_username*?
+
+    db.companies.find({ "$expr": { "$eq" : ["$permalink", "$twitter_username"] } }).count()
+
+**Array Operators**
+$push
+|Operator| How it works|
+|--|--|
+| $push | Allows us to add an element to an array and turns a field into an array if it was previously a different type |
+| $size | Returns a cursor with all documents where the specified array field is exactly the given length |
+| $all | Returns a cursor with all documents in which the specified array field contains all the given elements regardless of their order in the array |
+
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI0NDI3NzU5N119
+eyJoaXN0b3J5IjpbLTU1NjA3MjEzMl19
 -->
